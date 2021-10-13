@@ -1,0 +1,13 @@
+type Question @model {
+  id: ID!
+  name: String!
+  answer: [Answer] @connection(keyName: "byQuestion", fields: ["id"])
+}
+
+type Answer @model @key(name: "byQuestion", fields: ["answerID"]) {
+  id: ID!
+  title: String!
+  answerID: ID!
+  nextQuestionID: ID!
+  question: Question @connection(fields: ["answerID"])
+}
